@@ -5,7 +5,7 @@ import 'package:ifu/views/base/base_screen.dart';
 import 'package:ifu/views/chat/chat_screen.dart';
 import 'package:ifu/views/concept/concept_screen.dart';
 import 'package:ifu/views/home/home_screen.dart';
-import 'package:ifu/views/solving/solving_screen.dart';
+import 'package:ifu/views/solving/solving_entry_screen.dart';
 import 'package:ifu/widgets/root/custom_bottom_navigation_bar.dart';
 
 class RootScreen extends BaseScreen<RootViewModel> {
@@ -21,7 +21,7 @@ class RootScreen extends BaseScreen<RootViewModel> {
       children: const [
         HomeScreen(),
         ConceptScreen(),
-        SolvingScreen(),
+        SolvingEntryScreen(),
         ChatScreen(),
       ],
     ));

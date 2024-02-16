@@ -6,6 +6,8 @@ import 'package:ifu/views/concept/concept_screen.dart';
 import 'package:ifu/views/entry/entry_screen.dart';
 import 'package:ifu/views/home/home_screen.dart';
 import 'package:ifu/views/root/root_screen.dart';
+import 'package:ifu/views/solving/solution_screen.dart';
+import 'package:ifu/views/solving/solving_entry_screen.dart';
 import 'package:ifu/views/solving/solving_screen.dart';
 
 List<GetPage> appPages = [
@@ -29,8 +31,18 @@ List<GetPage> appPages = [
     binding: RootBinding()
   ),
   GetPage(
+    name: Routes.SOLVING_ENTRY,
+    page: () => const SolvingEntryScreen(),
+    binding: RootBinding()
+  ),
+  GetPage(
     name: Routes.SOLVING,
     page: () => const SolvingScreen(),
+    binding: RootBinding()
+  ),
+  GetPage(
+    name: Routes.SOLUTION,
+    page: () => const SolutionScreen(),
     binding: RootBinding()
   ),
   GetPage(
@@ -38,4 +50,5 @@ List<GetPage> appPages = [
     page: () => const ChatScreen(),
     binding: RootBinding()
   ),
+
 ];
