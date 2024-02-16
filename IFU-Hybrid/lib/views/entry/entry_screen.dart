@@ -79,7 +79,8 @@ class EntryScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          Get.offAndToNamed(Routes.ROOT);
+                          Get.toNamed(Routes.ROOT);
+                          // Get.offAndToNamed(Routes.ROOT);
                         },
                         child: const Text(
                           'Start',
