@@ -15,7 +15,7 @@ class ConceptScreen extends BaseScreen<ConceptViewModel> {
   PreferredSize buildAppBar(BuildContext context) {
     return const PreferredSize(
       preferredSize: Size.fromHeight(kToolbarHeight),
-      child: DefaultAppBar(title: 'Concept'),
+      child: DefaultAppBar(title: 'Concept of BIF'),
     );
   }
 }

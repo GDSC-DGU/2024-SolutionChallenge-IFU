@@ -12,8 +12,8 @@ class DefaultAppBar extends StatelessWidget {
         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
       ),
       centerTitle: true,
-      surfaceTintColor: Colors.white,
-      backgroundColor: Colors.white,
+      surfaceTintColor: const Color(0xFFE7EBF5),
+      backgroundColor: const Color(0xFFE7EBF5),
       automaticallyImplyLeading: true,
     );
   }

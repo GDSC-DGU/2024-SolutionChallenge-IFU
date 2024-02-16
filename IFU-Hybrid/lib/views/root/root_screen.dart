@@ -6,14 +6,13 @@ import 'package:ifu/views/chat/chat_screen.dart';
 import 'package:ifu/views/concept/concept_screen.dart';
 import 'package:ifu/views/home/home_screen.dart';
 import 'package:ifu/views/solving/solving_screen.dart';
-import 'package:ifu/widgets/base/default_appbar.dart';
 import 'package:ifu/widgets/root/custom_bottom_navigation_bar.dart';
 
 class RootScreen extends BaseScreen<RootViewModel> {
   const RootScreen({super.key});
 
   @override
-  Color get safeAreaColor => const Color(0xFFFFFFFF);
+  Color get safeAreaColor => const Color(0xFFE7EBF5);
 
   @override
   Widget buildBody(BuildContext context) {

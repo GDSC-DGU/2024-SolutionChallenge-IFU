@@ -15,7 +15,7 @@ class HomeScreen extends BaseScreen<HomeViewModel> {
   PreferredSize buildAppBar(BuildContext context) {
     return const PreferredSize(
       preferredSize: Size.fromHeight(kToolbarHeight),
-      child: DefaultAppBar(title: 'Home'),
+      child: DefaultAppBar(title: ''),
     );
   }
 }
