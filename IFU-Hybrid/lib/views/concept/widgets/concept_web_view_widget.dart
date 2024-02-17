@@ -16,8 +16,7 @@ class _WebViewState extends State<ConceptWebViewWidget> {
     super.initState();
     _controller = WebViewController()
       ..loadRequest(
-        Uri.parse('https://www.dev-changseop.site/'),
-
+        Uri.parse('https://65d0b72c8f9229857aabbd6b--chic-pudding-3bbe86.netlify.app/'),
       );
   }
 
