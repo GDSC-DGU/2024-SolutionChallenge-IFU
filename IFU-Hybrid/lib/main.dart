@@ -10,5 +10,5 @@ void main() async {
   await initializeDateFormatting();
 
   // runApp
-  runApp(const AppPage(initialRoute: Routes.ROOT));
+  runApp(const AppPage(initialRoute: Routes.ENTRY));
 }

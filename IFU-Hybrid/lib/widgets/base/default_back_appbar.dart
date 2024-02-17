@@ -20,8 +20,8 @@ class DefaultBackAppBar extends StatelessWidget {
             fontFamily: "Pretendard"),
       ),
       centerTitle: true,
-      surfaceTintColor: Colors.white,
-      backgroundColor: Colors.white,
+      surfaceTintColor: const Color(0xFFE7EBF5),
+      backgroundColor: const Color(0xFFE7EBF5),
       automaticallyImplyLeading: true,
       leadingWidth: 90,
       leading: TextButton.icon(
@@ -34,11 +34,11 @@ class DefaultBackAppBar extends StatelessWidget {
         ),
         icon: SvgPicture.asset("assets/icons/back.svg"),
         label: const Text(
-          "뒤로",
+          "Back",
           style: TextStyle(
             color: Color(0xFF434A54),
             fontFamily: "Pretendard",
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: FontWeight.w600,
             height: 1.4,
           ),

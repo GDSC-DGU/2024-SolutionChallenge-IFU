@@ -42,37 +42,37 @@ class CustomBottomNavigationBar extends BaseWidget<RootViewModel> {
                       Colors.black, BlendMode.srcATop)
                       : ColorFilter.mode(Colors.grey[400]!, BlendMode.srcATop),
                 ),
-                label: "홈"),
+                label: "Home"),
             BottomNavigationBarItem(
                 icon: SvgPicture.asset(
-                  'assets/icons/home.svg',
+                  'assets/icons/concept.svg',
                   height: 24,
                   colorFilter: viewModel.selectedIndex == 1
                       ? const ColorFilter.mode(
                       Colors.black, BlendMode.srcATop)
                       : ColorFilter.mode(Colors.grey[400]!, BlendMode.srcATop),
                 ),
-                label: "홈"),
+                label: "Concept"),
             BottomNavigationBarItem(
                 icon: SvgPicture.asset(
-                  'assets/icons/home.svg',
+                  'assets/icons/solving.svg',
                   height: 24,
                   colorFilter: viewModel.selectedIndex == 2
                       ? const ColorFilter.mode(
                       Colors.black, BlendMode.srcATop)
                       : ColorFilter.mode(Colors.grey[400]!, BlendMode.srcATop),
                 ),
-                label: "홈"),
+                label: "Solving"),
             BottomNavigationBarItem(
                 icon: SvgPicture.asset(
-                  'assets/icons/home.svg',
+                  'assets/icons/chat.svg',
                   height: 24,
                   colorFilter: viewModel.selectedIndex == 3
                       ? const ColorFilter.mode(
                       Colors.black, BlendMode.srcATop)
                       : ColorFilter.mode(Colors.grey[400]!, BlendMode.srcATop),
                 ),
-                label: "홈"),
+                label: "Chat"),
           ],
         ),
         )
