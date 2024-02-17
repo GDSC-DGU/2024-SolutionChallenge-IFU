@@ -38,7 +38,7 @@ class DefaultBackAppBar extends StatelessWidget {
           style: TextStyle(
             color: Color(0xFF434A54),
             fontFamily: "Pretendard",
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: FontWeight.w600,
             height: 1.4,
           ),

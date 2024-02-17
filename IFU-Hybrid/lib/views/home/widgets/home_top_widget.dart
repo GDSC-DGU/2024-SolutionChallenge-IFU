@@ -7,14 +7,50 @@ class HomeTopWidget extends BaseWidget<HomeViewModel> {
 
   @override
   Widget buildView(BuildContext context) {
-   return const Column(
+   return Column(
+     mainAxisAlignment: MainAxisAlignment.start,
+     crossAxisAlignment: CrossAxisAlignment.start,
      children: [
-       Text('Insight',
-       style: TextStyle(
-         fontSize: 20,
-         fontWeight: FontWeight.w600,
-       )),
+       const Padding(
+         padding: EdgeInsets.all(10),
+         child: Text('Insight',
+             style: TextStyle(
+               fontSize: 20,
+               fontWeight: FontWeight.w600,
+             )),
+       ),
+       _ListViewWidget(),
      ]
    );
+  }
+}
+
+class _ListViewWidget extends BaseWidget<HomeViewModel> {
+  @override
+  Widget buildView(BuildContext context) {
+    return SizedBox(
+      height: 226,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: 20,
+        itemBuilder: (context, index) {
+          return Container(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(25),
+            ),
+            width: 166,
+            margin: const EdgeInsets.all(8),
+            child: Text(
+              'Item $index',
+              style: const TextStyle(
+                fontSize: 24,
+                color: Colors.white,
+              ),
+            )
+          );
+        }
+      )
+    );
   }
 }

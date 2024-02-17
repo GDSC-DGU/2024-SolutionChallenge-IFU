@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ifu/view_models/concept/concept_view_model.dart';
 import 'package:ifu/views/base/base_screen.dart';
+import 'package:ifu/views/concept/widgets/concept_web_view_widget.dart';
 import 'package:ifu/widgets/base/default_appbar.dart';
 
 class ConceptScreen extends BaseScreen<ConceptViewModel> {
@@ -8,7 +9,7 @@ class ConceptScreen extends BaseScreen<ConceptViewModel> {
 
   @override
   Widget buildBody(BuildContext context) {
-    return Container();
+    return const ConceptWebViewWidget();
   }
 
   @override
