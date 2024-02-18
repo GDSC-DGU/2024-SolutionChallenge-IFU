@@ -43,6 +43,7 @@ dependencies:
   intl: ^0.18.1
   flutter_svg: ^2.0.9
   webview_flutter: ^4.7.0
+  flutter_chat_ui: ^1.6.12
 
 dev_dependencies:
   flutter_test:
