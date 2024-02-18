@@ -45,6 +45,8 @@ dependencies:
   webview_flutter: ^4.7.0
   flutter_chat_ui: ^1.6.12
   dio: ^5.4.1
+  speech_to_text: ^6.6.0
+  flutter_tts: ^3.8.5
 
 dev_dependencies:
   flutter_test:
