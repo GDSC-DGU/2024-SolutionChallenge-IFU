@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ifu/view_models/home/home_view_model.dart';
 import 'package:ifu/views/base/base_widget.dart';
+import 'package:ifu/views/home/web_view_screen.dart';
 
 class HomeMiddleWidget extends BaseWidget<HomeViewModel> {
   const HomeMiddleWidget({super.key});
@@ -28,83 +30,118 @@ class HomeMiddleWidget extends BaseWidget<HomeViewModel> {
 class _ListViewWidget extends BaseWidget<HomeViewModel> {
   @override
   Widget buildView(BuildContext context) {
-   return SizedBox(
-     height: 315,
-     child: ListView.builder(
-         itemCount: 20,
-         itemBuilder: (BuildContext context, int index) {
-           return _ViewWidget();
+   return Obx(
+       () {
+         if (controller.isLoading.value) {
+           return const Center(child: CircularProgressIndicator());
+         } else if (controller.edus == null) {
+           return const Center(child: Text('Failed to load data'));
+         } else {
+           return SizedBox(
+               height: 315,
+               child: ListView.builder(
+                   itemCount: controller.edus?.length,
+                   itemBuilder: (BuildContext context, int index) {
+                     return _ViewWidget(index);
+                   }
+               )
+           );
          }
-     )
+       }
    );
   }
 }
 
-class _ViewWidget extends BaseWidget {
+class _ViewWidget extends BaseWidget<HomeViewModel> {
+  final int index;
+
+  const _ViewWidget(this.index);
+
   @override
   Widget buildView(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Row(
-        children: [
-          _ImageContainer(),
-          const SizedBox(width: 10),
-          _TextContainer(),
-        ]
-      )
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => WebViewScreen(
+          controller.edus![index].webUrl,
+          )
+        )
+        );
+      },
+      child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+              children: [
+                _ImageContainer(index),
+                const SizedBox(width: 10),
+                _TextContainer(index),
+              ]
+          )
+      ),
     );
   }
 }
 
-class _ImageContainer extends StatelessWidget {
+class _ImageContainer extends BaseWidget<HomeViewModel> {
+  final int index;
+
+  const _ImageContainer(this.index);
+
   @override
-  Widget build(BuildContext context) {
+  Widget buildView(BuildContext context) {
     return Container(
       width: 200,
       height: 200,
       decoration: BoxDecoration(
-        color: Colors.blue,
+        image: DecorationImage(
+          image: NetworkImage(controller.edus![index].imageUrl),
+        ),
         borderRadius: BorderRadius.circular(12),
       )
     );
   }
 }
 
-class _TextContainer extends StatelessWidget {
+class _TextContainer extends BaseWidget<HomeViewModel> {
+  final int index;
+
+  const _TextContainer(this.index);
+
   @override
-  Widget build(BuildContext context) {
+  Widget buildView(BuildContext context) {
     return Column(
-      children: [
-        const Text(
-          'Title',
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-          )
-        ),
-        const Text(
-          'Country',
-          style: TextStyle(
-            color: Color(0xFF50586C),
-            fontSize: 12,
-            fontWeight: FontWeight.bold
-          )
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFFD9E1E8),
-            borderRadius: BorderRadius.circular(5),
+        children: [
+          Text(
+              controller.edus![index].title,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+              )
           ),
-          child: const Text(
-            'description',
-            style: TextStyle(
-              color: Color(0xFF0A0A0A),
-              fontSize: 8,
-              fontWeight: FontWeight.w300
-            ),
-        )
-        )
-      ]
+          Text(
+              controller.edus![index].country,
+              style: const TextStyle(
+                  color: Color(0xFF50586C),
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold
+              )
+          ),
+          Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFFD9E1E8),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Text(
+                controller.edus![index].description,
+                style: const TextStyle(
+                    color: Color(0xFF0A0A0A),
+                    fontSize: 8,
+                    fontWeight: FontWeight.w300
+                ),
+              )
+          )
+        ]
     );
   }
 }
