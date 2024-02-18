@@ -68,15 +68,34 @@ class _ViewWidget extends BaseWidget<HomeViewModel> {
             )
           );
         },
-        child: Container(
-            width: 340,
-            height: 175,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(controller.lifes![index].imageUrl)
-                )
+        child: Stack(
+          children: [
+            Image.network(
+              controller.lifes![index].imageUrl,
+              width: MediaQuery.of(context).size.width - 20,
+              height: 175,
+              fit: BoxFit.cover
             ),
-            child: Column(
+            Container(
+              width: MediaQuery.of(context).size.width - 20,
+              height: 175,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [
+                    Colors.black.withOpacity(0.8),
+                    Colors.transparent,
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 10,
+              left: 10,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     controller.lifes![index].title,
@@ -87,15 +106,17 @@ class _ViewWidget extends BaseWidget<HomeViewModel> {
                     ),
                   ),
                   Text(
-                      controller.lifes![index].city,
-                      style: const TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white,
-                      )
+                    controller.lifes![index].city,
+                    style: const TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
+                    )
                   )
                 ]
-            )
+              ),
+              )
+          ]
         )
       ),
     );

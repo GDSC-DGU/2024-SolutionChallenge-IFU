@@ -91,11 +91,12 @@ class _ImageContainer extends BaseWidget<HomeViewModel> {
   @override
   Widget buildView(BuildContext context) {
     return Container(
-      width: 200,
-      height: 200,
+      width: MediaQuery.of(context).size.width * 0.4,
+      height:  MediaQuery.of(context).size.width * 0.4,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: NetworkImage(controller.edus![index].imageUrl),
+          fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(12),
       )
@@ -111,11 +112,13 @@ class _TextContainer extends BaseWidget<HomeViewModel> {
   @override
   Widget buildView(BuildContext context) {
     return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
               controller.edus![index].title,
               style: const TextStyle(
-                fontSize: 12,
+                fontSize: 14,
                 fontWeight: FontWeight.w400,
               )
           ),
@@ -123,7 +126,7 @@ class _TextContainer extends BaseWidget<HomeViewModel> {
               controller.edus![index].country,
               style: const TextStyle(
                   color: Color(0xFF50586C),
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold
               )
           ),
@@ -132,11 +135,12 @@ class _TextContainer extends BaseWidget<HomeViewModel> {
                 color: const Color(0xFFD9E1E8),
                 borderRadius: BorderRadius.circular(5),
               ),
+              padding: const EdgeInsets.all(2),
               child: Text(
                 controller.edus![index].description,
                 style: const TextStyle(
                     color: Color(0xFF0A0A0A),
-                    fontSize: 8,
+                    fontSize: 12,
                     fontWeight: FontWeight.w300
                 ),
               )

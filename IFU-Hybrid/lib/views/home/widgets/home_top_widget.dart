@@ -38,7 +38,7 @@ class _ListViewWidget extends BaseWidget<HomeViewModel> {
             return const Center(child: Text('Failed to load data'));
           } else {
             return SizedBox(
-                height: 226,
+                height: 240,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: controller.insights!.length,
@@ -52,30 +52,77 @@ class _ListViewWidget extends BaseWidget<HomeViewModel> {
                             )
                           );
                         },
-                        child: Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(controller.insights![index].imageUrl),
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            width: 166,
-                            margin: const EdgeInsets.all(10),
-                            child: Text(
-                              controller.insights![index].title,
-                              style: const TextStyle(
-                                fontSize: 10,
-                                color: Colors.white,
-                              ),
-                            )
-                        ),
+                        child: _ViewWidget(index),
                       );
                     }
                 )
             );
           }
         }
+    );
+  }
+}
+
+class _ViewWidget extends BaseWidget<HomeViewModel> {
+  final int index;
+
+  const _ViewWidget(this.index);
+
+  @override
+  Widget buildView(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+            color: Color(int.parse(controller.insights![index].color)),
+            borderRadius: BorderRadius.circular(25),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.5),
+                spreadRadius: -3,
+                blurRadius: 7,
+                offset: const Offset(0, 3),
+              )
+            ]
+        ),
+        width: 166,
+        margin: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(25),
+                topRight: Radius.circular(25),
+              ),
+              child: Image.network(
+                controller.insights![index].imageUrl,
+                width: 166,
+                height: 176,
+                fit: BoxFit.cover,
+              ),
+            ),
+            _TextWidget(index),
+          ]
+        )
+    );
+  }
+}
+
+class _TextWidget extends BaseWidget<HomeViewModel> {
+  final int index;
+
+  const _TextWidget(this.index);
+
+  @override
+  Widget buildView(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(13),
+      child: Text(
+        controller.insights![index].title,
+        style: const TextStyle(
+          fontSize: 12,
+          color: Colors.white,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
     );
   }
 }
