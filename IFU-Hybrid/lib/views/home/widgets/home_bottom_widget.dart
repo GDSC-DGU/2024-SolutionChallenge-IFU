@@ -12,7 +12,7 @@ class HomeBottomWidget extends BaseWidget<HomeViewModel> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.all(12),
           child: Text('Life & Culture',
           style: TextStyle(
             fontSize: 20,
@@ -43,35 +43,35 @@ class _ListViewWidget extends BaseWidget<HomeViewModel> {
 class _ViewWidget extends BaseWidget {
   @override
   Widget buildView(BuildContext context) {
-    return Container(
-      width: 340,
-      height: 175,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/problems.png'),
-          fit: BoxFit.cover,
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        width: 340,
+        height: 175,
+        decoration: const BoxDecoration(
+          color: Colors.blue,
         ),
-      ),
-      child: const Column(
-        children: [
-          Text(
-            'Title',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: Colors.white,
-            ),
-          ),
-          Text(
-              'Country',
+        child: const Column(
+          children: [
+            Text(
+              'Title',
               style: TextStyle(
-                fontSize: 11,
+                fontSize: 16,
                 fontWeight: FontWeight.w400,
                 color: Colors.white,
-              )
-          )
-        ]
-      )
+              ),
+            ),
+            Text(
+                'Country',
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.white,
+                )
+            )
+          ]
+        )
+      ),
     );
   }
 }

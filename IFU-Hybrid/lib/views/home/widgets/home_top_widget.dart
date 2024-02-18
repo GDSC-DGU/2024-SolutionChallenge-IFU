@@ -12,7 +12,7 @@ class HomeTopWidget extends BaseWidget<HomeViewModel> {
      crossAxisAlignment: CrossAxisAlignment.start,
      children: [
        const Padding(
-         padding: EdgeInsets.all(10),
+         padding: EdgeInsets.all(12),
          child: Text('Insight',
              style: TextStyle(
                fontSize: 20,
@@ -40,7 +40,7 @@ class _ListViewWidget extends BaseWidget<HomeViewModel> {
               borderRadius: BorderRadius.circular(25),
             ),
             width: 166,
-            margin: const EdgeInsets.all(8),
+            margin: const EdgeInsets.all(10),
             child: Text(
               'Item $index',
               style: const TextStyle(

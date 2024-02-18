@@ -12,7 +12,7 @@ class HomeMiddleWidget extends BaseWidget<HomeViewModel> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(12),
           child: Text('Jobs & Education',
               style: TextStyle(
                 fontSize: 20,
@@ -43,11 +43,15 @@ class _ListViewWidget extends BaseWidget<HomeViewModel> {
 class _ViewWidget extends BaseWidget {
   @override
   Widget buildView(BuildContext context) {
-    return Row(
-      children: [
-        _ImageContainer(),
-        _TextContainer(),
-      ]
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        children: [
+          _ImageContainer(),
+          const SizedBox(width: 10),
+          _TextContainer(),
+        ]
+      )
     );
   }
 }
@@ -56,8 +60,8 @@ class _ImageContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
-      height: 150,
+      width: 200,
+      height: 200,
       decoration: BoxDecoration(
         color: Colors.blue,
         borderRadius: BorderRadius.circular(12),
