@@ -11,6 +11,8 @@ class SolvingViewModel extends GetxController {
   List<SolvingModel>? get solvings => _solvings.value;
   SolvingModel? get currentQuestion =>
       _solvings.value?.elementAt(_currentQuestionIndex.value);
+  String? get currentAnswer =>
+      _solvings.value?.elementAt(_currentQuestionIndex.value).answer;
 
   int get currentQuestionIndex => _currentQuestionIndex.value;
 
@@ -34,11 +36,11 @@ class SolvingViewModel extends GetxController {
     if (_currentQuestionIndex.value < (_solvings.value?.length ?? 0) - 1) {
       _currentQuestionIndex.value++;
     } else {
-      _currentQuestionIndex.value = 0; // 리스트의 마지막에 도달한 경우, 첫 번째 문제로 돌아갑니다.
+      _currentQuestionIndex.value = 0;
     }
   }
 
   void resetQuestions() {
-    _currentQuestionIndex.value = 0; // 모든 문제를 리셋하고 첫 번째 문제부터 시작합니다.
+    _currentQuestionIndex.value = 0;
   }
 }
