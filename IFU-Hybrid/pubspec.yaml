@@ -47,6 +47,9 @@ dependencies:
   dio: ^5.4.1
   speech_to_text: ^6.6.0
   flutter_tts: ^3.8.5
+  open_filex: ^4.4.0
+  uuid: ^4.3.3
+  google_generative_ai: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +78,7 @@ flutter:
     - assets/icons/
     - assets/config/.env
     - assets/data/
+    - assets/data/messages.json
 
   fonts:
     - family: Pretendard
