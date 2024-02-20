@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import "package:http/http.dart" as http;
 import "package:flutter_chat_types/flutter_chat_types.dart" as types;
+import 'package:ifu/utils/function/gemini_util.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:uuid/uuid.dart';
 
@@ -21,6 +22,10 @@ class _ChatWidgetState extends State<ChatWidget> {
 
   final _user = const types.User(
     id: '1',
+  );
+
+  final _bot = const types.User(
+    id: '2',
   );
 
   @override
@@ -90,7 +95,9 @@ class _ChatWidgetState extends State<ChatWidget> {
     });
   }
 
-  void _handleSendPressed(types.PartialText message) {
+  void _handleSendPressed(types.PartialText message) async {
+    final text = await geminiUtil(message);
+
     final textMessage = types.TextMessage(
       author: _user,
       createdAt: DateTime
@@ -101,6 +108,17 @@ class _ChatWidgetState extends State<ChatWidget> {
     );
 
     _addMessage(textMessage);
+
+    final botMessage = types.TextMessage(
+      author: _bot,
+      createdAt: DateTime
+        .now()
+        .millisecondsSinceEpoch,
+      id: const Uuid().v4(),
+      text: text!,
+    );
+
+    _addMessage(botMessage);
   }
 
   void _loadMessages() async {
