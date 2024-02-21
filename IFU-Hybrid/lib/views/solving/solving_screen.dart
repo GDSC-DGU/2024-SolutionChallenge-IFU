@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ifu/utils/class/app_routes.dart';
 import 'package:ifu/view_models/solving/solving_view_model.dart';
 import 'package:ifu/views/base/base_screen.dart';
+import 'package:ifu/views/solving/widgets/solving_widget.dart';
 import 'package:ifu/widgets/base/default_back_appbar.dart';
 
 class SolvingScreen extends BaseScreen<SolvingViewModel> {
@@ -10,33 +11,72 @@ class SolvingScreen extends BaseScreen<SolvingViewModel> {
 
   @override
   Widget buildBody(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Center(),
-          TextButton(
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 130, vertical: 15),
-                backgroundColor: const Color(0xFFF2F4FA),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)
+    final SolvingViewModel controller = Get.find<SolvingViewModel>();
+
+    return LayoutBuilder(builder: (context, constraints) {
+      return Obx(() {
+        if (controller.isLoading.isTrue) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (controller.currentQuestion != null) {
+          return Column(
+            children: [
+              const Expanded(
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Q.',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      SizedBox(height: 30),
+                    ],
+                  ),
                 ),
               ),
-              onPressed: () {
-                Get.toNamed(Routes.SOLUTION);
-              },
-              child: const Text(
-                  'Solution',
-                  style: TextStyle(
-                      color: Color(0xFF2B90D9),
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold
-                  )
-              )
-          )
-        ]
-      )
-    );
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: SolvingWidget(question: controller.currentQuestion!),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(20, 20, 20, 140),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 130, vertical: 15),
+                        backgroundColor: const Color(0xFFF2F4FA),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                      ),
+                      onPressed: () {
+                        Get.toNamed(Routes.SOLUTION,
+                            arguments: controller.currentQuestionIndex);
+                      },
+                      child: const Text(
+                        'Solution',
+                        style: TextStyle(
+                            color: Color(0xFF2B90D9),
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        } else {
+          return const Center(child: Text("No questions."));
+        }
+      });
+    });
   }
 
   @override
