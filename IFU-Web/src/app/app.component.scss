@@ -1,0 +1,183 @@
+// Define colors and other variables at the top of your SCSS file
+$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$primary-color: #333;
+
+:host {
+  --bright-blue: oklch(51.01% 0.274 263.83);
+  --electric-violet: oklch(53.18% 0.28 296.97);
+  --french-violet: oklch(47.66% 0.246 305.88);
+  --vivid-pink: oklch(69.02% 0.277 332.77);
+  --hot-red: oklch(61.42% 0.238 15.34);
+  --orange-red: oklch(63.32% 0.24 31.68);
+
+  --gray-900: oklch(19.37% 0.006 300.98);
+  --gray-700: oklch(36.98% 0.014 302.71);
+  --gray-400: oklch(70.9% 0.015 304.04);
+
+  --red-to-pink-to-purple-vertical-gradient: linear-gradient(
+    180deg,
+    var(--orange-red) 0%,
+    var(--vivid-pink) 50%,
+    var(--electric-violet) 100%
+  );
+
+  --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
+    90deg,
+    var(--orange-red) 0%,
+    var(--vivid-pink) 50%,
+    var(--electric-violet) 100%
+  );
+
+  --pill-accent: var(--bright-blue);
+
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: 2.6rem;
+  color: var(--gray-900);
+  font-weight: 600;
+  line-height: 100%;
+  letter-spacing: -0.125rem;
+  margin: 0;
+  font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  text-align: center;
+}
+
+// Base styles
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+.bif-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    text-align: center;
+  }
+
+  img {
+    margin-top: 20px;
+    align-items: center;
+    width: 317px;
+    height: 144px;
+  }
+}
+
+// BIF Section styles
+.bif-section {
+  width: 100%;
+  box-sizing: border-box;
+  height: 100%;
+
+  h1 {
+    font-size: 2rem;
+    color: #000;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+.bif-sub-section {
+  h3 {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+main {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: inherit;
+  position: relative;
+  background-color: #e7ebf5;
+}
+
+// Use media queries for responsive design
+@media (max-width: 768px) {
+  .bif-section {
+    padding: 10px;
+  }
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+  max-width: 375px;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+  background-color: #e7ebf5;
+
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.divider {
+  width: 1px;
+  background: var(--red-to-pink-to-purple-vertical-gradient);
+  margin-inline: 0.5rem;
+}
+
+@media screen and (max-width: 650px) {
+  .content {
+    flex-direction: column;
+    width: max-content;
+  }
+
+  .divider {
+    height: 1px;
+    width: 100%;
+    background: var(--red-to-pink-to-purple-horizontal-gradient);
+    margin-block: 1.5rem;
+  }
+}
+
+hr {
+  border: none;
+  border-top: 2px solid #8c8c8c;
+  margin: 10px 0;
+}
+
+/* Fade-in 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 아래에서 위로 올라오는 애니메이션 */
+@keyframes slideUp {
+  from {
+    transform: translateY(20%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
