@@ -92,6 +92,8 @@ body {
     line-height: 1.5;
     margin-bottom: 10px;
   }
+
+  animation: slideUp 0.5s ease-out forwards;
 }
 
 .bif-sub-section {
@@ -128,6 +130,8 @@ main {
   margin-bottom: 3rem;
   margin-top: 2rem;
   background-color: #e7ebf5;
+
+  animation: fadeIn 1s ease-out forwards;
 }
 
 .divider {
@@ -154,4 +158,26 @@ hr {
   border: none;
   border-top: 2px solid #8c8c8c;
   margin: 10px 0;
+}
+
+/* Fade-in 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 아래에서 위로 올라오는 애니메이션 */
+@keyframes slideUp {
+  from {
+    transform: translateY(20%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
