@@ -43,8 +43,15 @@ dependencies:
   intl: ^0.18.1
   flutter_svg: ^2.0.9
   webview_flutter: ^4.7.0
-  flutter_chat_ui: ^1.6.12
+  flutter_chat_ui:
+    git:
+      url: https://github.com/kurtyoon/flutter_chat_ui.git
+      ref: main
   dio: ^5.4.1
+  speech_to_text: ^6.6.0
+  flutter_tts: ^3.8.5
+  uuid: ^4.3.3
+  google_generative_ai: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -72,7 +79,6 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/config/.env
-    - assets/data/
 
   fonts:
     - family: Pretendard
