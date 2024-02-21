@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ConceptWebViewWidget extends StatefulWidget {
@@ -10,13 +11,14 @@ class ConceptWebViewWidget extends StatefulWidget {
 
 class _WebViewState extends State<ConceptWebViewWidget> {
   late final WebViewController _controller;
+  final String webUrl = dotenv.env['CONCEPT_WEB_URL']!;
 
   @override
   void initState() {
     super.initState();
     _controller = WebViewController()
       ..loadRequest(
-        Uri.parse('https://65d0b72c8f9229857aabbd6b--chic-pudding-3bbe86.netlify.app/'),
+        Uri.parse(webUrl),
       );
   }
 

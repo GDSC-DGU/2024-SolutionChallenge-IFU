@@ -50,7 +50,7 @@ class SolvingEntryScreen extends BaseScreen<SolvingViewModel> {
                 'Solving',
                 style: TextStyle(
                     color: Color(0xFF2B90D9),
-                    fontSize: 24,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold),
               ),
             ),

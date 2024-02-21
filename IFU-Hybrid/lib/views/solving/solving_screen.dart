@@ -20,23 +20,8 @@ class SolvingScreen extends BaseScreen<SolvingViewModel> {
         } else if (controller.currentQuestion != null) {
           return Column(
             children: [
-              const Expanded(
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Q.',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                      SizedBox(height: 30),
-                    ],
-                  ),
-                ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.3,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -46,7 +31,7 @@ class SolvingScreen extends BaseScreen<SolvingViewModel> {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    margin: const EdgeInsets.fromLTRB(20, 20, 20, 140),
+                    margin: const EdgeInsets.fromLTRB(20, 20, 20, 175),
                     child: TextButton(
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
@@ -63,7 +48,7 @@ class SolvingScreen extends BaseScreen<SolvingViewModel> {
                         'Solution',
                         style: TextStyle(
                             color: Color(0xFF2B90D9),
-                            fontSize: 24,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
