@@ -1,13 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import "package:http/http.dart" as http;
 import "package:flutter_chat_types/flutter_chat_types.dart" as types;
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:ifu/utils/function/gemini_util.dart';
-import 'package:open_filex/open_filex.dart';
 import 'package:uuid/uuid.dart';
 
 class ChatWidget extends StatefulWidget {
@@ -18,7 +13,7 @@ class ChatWidget extends StatefulWidget {
 }
 
 class _ChatWidgetState extends State<ChatWidget> {
-  List<types.Message> _messages = [];
+  final List<types.Message> _messages = [];
 
   final _user = const types.User(
     id: '1',
@@ -28,59 +23,34 @@ class _ChatWidgetState extends State<ChatWidget> {
     id: '2',
   );
 
+  final FlutterTts flutterTts = FlutterTts();
+
   @override
   void initState() {
     super.initState();
-    _loadMessages();
+    initTts();
+  }
+
+  Future<void> initTts() async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1);
+    await flutterTts.setSpeechRate(0.5);
+    await flutterTts.setSharedInstance(true);
+    await flutterTts.setIosAudioCategory(IosTextToSpeechAudioCategory.playback,
+        [
+          IosTextToSpeechAudioCategoryOptions.allowBluetooth,
+          IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+          IosTextToSpeechAudioCategoryOptions.mixWithOthers,
+          IosTextToSpeechAudioCategoryOptions.defaultToSpeaker
+        ],
+        IosTextToSpeechAudioMode.defaultMode
+    );
   }
 
   void _addMessage(types.Message message) {
     setState(() {
       _messages.insert(0, message);
     });
-  }
-
-  void _handleMessageTap(BuildContext _, types.Message message) async {
-    if (message is types.FileMessage) {
-      var localPath = message.uri;
-
-      if (message.uri.startsWith('http')) {
-        try {
-          final index =
-          _messages.indexWhere((element) => element.id == message.id);
-          final updateMessage =
-          (_messages[index] as types.FileMessage).copyWith(isLoading: true,);
-
-          setState(() {
-            _messages[index] = updateMessage;
-          });
-
-          final client = http.Client();
-          final request = await client.get(Uri.parse(message.uri));
-          final bytes = request.bodyBytes;
-          localPath = '/data/user/0/com.example.ifu/cache/${message.uri
-              .split('/')
-              .last}';
-          if (!File(localPath).existsSync()) {
-            final file = File(localPath);
-            await file.writeAsBytes(bytes);
-          }
-        } finally {
-          final index =
-          _messages.indexWhere((element) => element.id == message.id);
-          final updateMessage =
-          (_messages[index] as types.FileMessage).copyWith(
-            isLoading: null,
-          );
-
-          setState(() {
-            _messages[index] = updateMessage;
-          });
-        }
-      }
-
-      await OpenFilex.open(localPath);
-    }
   }
 
   void _handlePreviewDataFetched(types.TextMessage message,
@@ -95,8 +65,22 @@ class _ChatWidgetState extends State<ChatWidget> {
     });
   }
 
-  void _handleSendPressed(types.PartialText message) async {
+  Future<void> _handleResponse(types.PartialText message) async {
     final text = await geminiUtil(message);
+    final botMessage = types.TextMessage(
+      author: _bot,
+      createdAt: DateTime
+        .now()
+        .millisecondsSinceEpoch,
+      id: const Uuid().v4(),
+      text: text!,
+    );
+
+    _addMessage(botMessage);
+    await flutterTts.speak(text);
+  }
+
+  void _handleSendPressed(types.PartialText message) async {
 
     final textMessage = types.TextMessage(
       author: _user,
@@ -108,28 +92,13 @@ class _ChatWidgetState extends State<ChatWidget> {
     );
 
     _addMessage(textMessage);
-
-    final botMessage = types.TextMessage(
-      author: _bot,
-      createdAt: DateTime
-        .now()
-        .millisecondsSinceEpoch,
-      id: const Uuid().v4(),
-      text: text!,
-    );
-
-    _addMessage(botMessage);
+    await _handleResponse(message);
   }
 
-  void _loadMessages() async {
-    final response = await rootBundle.loadString('assets/messages.json');
-    final messages = (jsonDecode(response) as List)
-        .map((e) => types.Message.fromJson(e as Map<String, dynamic>))
-        .toList();
-
-    setState(() {
-      _messages = messages;
-    });
+  void _handleMessageTap(BuildContext _, types.Message message) async {
+    if (message is types.TextMessage) {
+      await flutterTts.speak(message.text);
+    }
   }
 
   @override
@@ -137,11 +106,14 @@ class _ChatWidgetState extends State<ChatWidget> {
     return Scaffold(
       body: Chat(
         theme: const DefaultChatTheme(
+          primaryColor: Color(0xFF88B4DF),
+          secondaryColor: Color(0xFFF2F4FA),
+          backgroundColor: Color(0xFFE7EBF5),
           inputBackgroundColor: Color(0xFFFFFFFF),
           inputTextColor: Color(0xFF000000)
         ),
         messages: _messages,
-        onMessageTap: _handleMessageTap,
+        onMessageDoubleTap: _handleMessageTap,
         onPreviewDataFetched: _handlePreviewDataFetched,
         onSendPressed: _handleSendPressed,
         user: _user,

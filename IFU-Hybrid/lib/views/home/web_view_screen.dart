@@ -13,7 +13,7 @@ class WebViewScreen extends BaseScreen<HomeViewModel> {
   PreferredSize buildAppBar(BuildContext context) {
     return const PreferredSize(
       preferredSize: Size.fromHeight(kToolbarHeight),
-      child: DefaultBackAppBar(title: 'Concept of BIF'),
+      child: DefaultBackAppBar(title: 'Contents'),
     );
   }
 
