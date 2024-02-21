@@ -40,6 +40,10 @@ class SolvingViewModel extends GetxController {
     }
   }
 
+  void onScreenTransitionComplete() {
+    nextQuestion();
+  }
+
   void resetQuestions() {
     _currentQuestionIndex.value = 0;
   }

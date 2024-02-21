@@ -45,8 +45,8 @@ class SolvingScreen extends BaseScreen<SolvingViewModel> {
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(20, 20, 20, 140),
                     child: TextButton(
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(

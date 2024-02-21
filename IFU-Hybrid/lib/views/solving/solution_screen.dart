@@ -39,13 +39,13 @@ class SolutionScreen extends BaseScreen<SolvingViewModel> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: SolutionWidget(answer: controller.currentAnswer!!),
+                child: SolutionWidget(answer: controller.currentAnswer!),
               ),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 140),
                     child: TextButton(
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
@@ -57,7 +57,9 @@ class SolutionScreen extends BaseScreen<SolvingViewModel> {
                       onPressed: () {
                         int count = 0;
                         Navigator.of(context).popUntil((_) => count++ >= 2);
-                        controller.nextQuestion();
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          controller.onScreenTransitionComplete();
+                        });
                       },
                       child: const Text(
                         'Complete',
